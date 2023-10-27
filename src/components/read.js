@@ -1,49 +1,28 @@
-import Books from "./books";
+import React, { useEffect, useState } from "react";
+import Books from "./books"; // Import the 'Books' component for rendering book data.
+import axios from "axios";
 
 function Read() {
-    const data = [
-        {
-            "title": "Learn Git in a Month of Lunches",
-            "isbn": "1617292419",
-            "pageCount": 0,
-            "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/umali.jpg",
-            "status": "MEAP",
-            "authors": ["Rick Umali"],
-            "categories": []
-        },
-        {
-            "title": "MongoDB in Action, Second Edition",
-            "isbn": "1617291609",
-            "pageCount": 0,
-            "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker2.jpg",
-            "status": "MEAP",
-            "authors": [
-                "Kyle Banker",
-                "Peter Bakkum",
-                "Tim Hawkins",
-                "Shaun Verch",
-                "Douglas Garrett"
-            ],
-            "categories": []
-        },
-        {
-            "title": "Getting MEAN with Mongo, Express, Angular, and Node",
-            "isbn": "1617292036",
-            "pageCount": 0,
-            "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sholmes.jpg",
-            "status": "MEAP",
-            "authors": ["Simon Holmes"],
-            "categories": []
-        }
-    ];
+    const [data, setData] = useState([]); // Initialize a state variable 'data' to store book data.
+
+    useEffect(() => {
+        // Use the 'useEffect' hook to make an HTTP GET request to fetch book data.
+        axios.get("http://www.jsonblob.com/1164846445852745728")
+            .then((response) => {
+                // When the request is successful, update the 'data' state with the fetched book data.
+                setData(response.data.myBooks);
+            })
+            .catch(error => {
+                console.error(error); // Log any errors that occur during the HTTP request.
+            });
+    }, []); // The empty dependency array ensures this effect runs only once after component mounting.
 
     return (
         <div>
-            <h2>Hello from Read Component!</h2>
-            <Books myBooks={data}></Books>
+            {/* Render the 'Books' component, passing the book data as the 'myBooks' prop. */}
+            <Books myBooks={data} />
         </div>
     );
-
 }
 
 export default Read;
