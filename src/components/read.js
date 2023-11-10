@@ -7,7 +7,7 @@ function Read() {
 
     useEffect(() => {
         // Use the 'useEffect' hook to make an HTTP GET request to fetch book data.
-        axios.get("http://www.jsonblob.com/1164846445852745728")
+        axios.get("http://local host:4000/api/books")
             .then((response) => {
                 // When the request is successful, update the 'data' state with the fetched book data.
                 setData(response.data.myBooks);
