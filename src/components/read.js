@@ -5,17 +5,18 @@ import axios from "axios";
 function Read() {
     const [data, setData] = useState([]); // Initialize a state variable 'data' to store book data.
 
-    useEffect(() => {
-        // Use the 'useEffect' hook to make an HTTP GET request to fetch book data.
-        axios.get("http://local host:4000/api/books")
-            .then((response) => {
-                // When the request is successful, update the 'data' state with the fetched book data.
-                setData(response.data.myBooks);
-            })
-            .catch(error => {
-                console.error(error); // Log any errors that occur during the HTTP request.
-            });
-    }, []); // The empty dependency array ensures this effect runs only once after component mounting.
+    useEffect(
+        () => {
+                // Use the 'useEffect' hook to make an HTTP GET request to fetch book data.
+                axios.get("http://local host:4000/api/books")
+                    .then((response) => {
+                        // When the request is successful, update the 'data' state with the fetched book data.
+                        setData(response.data.myBooks);
+                    })
+                    .catch(error => {
+                        console.error(error); // Log any errors that occur during the HTTP request.
+                    });
+        }, []); // The empty dependency array ensures this effect runs only once after component mounting.
 
     return (
         <div>
